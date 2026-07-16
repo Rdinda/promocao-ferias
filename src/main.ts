@@ -108,17 +108,19 @@ function getActiveRoute(): '5off' | '10off' | null {
   const params = new URLSearchParams(window.location.search);
   const promoParam = (params.get('promo') || params.get('p') || params.get('v') || '').toLowerCase();
 
-  // 1. Verificar query param
-  if (promoParam.includes('5')) return '5off';
-  if (promoParam.includes('10')) return '10off';
+  // 1. Verificar query param (correspondência exata do valor)
+  if (['5', '5off', '5%off'].includes(promoParam)) return '5off';
+  if (['10', '10off', '10%off'].includes(promoParam)) return '10off';
 
-  // 2. Verificar hash
-  if (hash.includes('5')) return '5off';
-  if (hash.includes('10')) return '10off';
+  // 2. Verificar hash (partes específicas do hash splitadas por '/')
+  const hashParts = hash.split('/');
+  if (hashParts.some(part => ['5', '5off', '5%off'].includes(part))) return '5off';
+  if (hashParts.some(part => ['10', '10off', '10%off'].includes(part))) return '10off';
 
-  // 3. Verificar pathname
-  if (path.includes('5')) return '5off';
-  if (path.includes('10')) return '10off';
+  // 3. Verificar pathname (partes do path splitadas por '/', evitando o código de rastreamento)
+  const pathParts = path.split('/');
+  if (pathParts.some(part => ['5', '5off', '5%off'].includes(part))) return '5off';
+  if (pathParts.some(part => ['10', '10off', '10%off'].includes(part))) return '10off';
 
   return null;
 }
