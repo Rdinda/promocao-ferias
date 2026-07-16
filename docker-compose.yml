@@ -1,6 +1,6 @@
 services:
   promocao-ferias:
-    image: ghcr.io/rdinda/promocao-ferias:latest
+    image: ghcr.io/dindou/promocao-ferias:latest
     networks:
       - web
     deploy:
