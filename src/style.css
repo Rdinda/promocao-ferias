@@ -1,0 +1,473 @@
+/*
+  Estilo de Design System Premium - Promoções Ferias
+  Mobile-First, Glassmorphism elegante, tons dourado/cobre, Animações suaves
+*/
+
+:root {
+  /* Cores base */
+  --bg-dark: #090a0f;
+  --bg-card: rgba(18, 22, 35, 0.65);
+  --bg-card-border: rgba(255, 255, 255, 0.08);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
+
+  /* Cores de Destaque - paleta dourado/cobre elegante */
+  --primary-glow: #b08d57;
+  --accent-5off: #c9a227;
+  /* Dourado */
+  --accent-5off-dark: #8a6f1c;
+  --accent-10off: #b8794f;
+  /* Cobre / rosé */
+  --accent-10off-dark: #7a4f2f;
+  --text-primary: #ffffff;
+  --text-secondary: #9aa0b9;
+  --text-on-accent: #1a140a;
+
+  /* Fontes */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #050608;
+  color: var(--text-primary);
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* Evita rolagens indesejadas no mobile */
+  position: relative;
+}
+
+/* Container principal simulando mobile no desktop */
+#app {
+  width: 100%;
+  height: 100svh;
+  max-width: 480px;
+  /* Limite de tela de celular */
+  margin: 0 auto;
+  position: relative;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  border-left: 1px solid rgba(255, 255, 255, 0.03);
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- TELA INICIAL (SELEÇÃO) --- */
+.screen-home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 24px;
+  z-index: 10;
+  background: radial-gradient(circle at top right, rgba(176, 141, 87, 0.15), transparent 60%),
+    radial-gradient(circle at bottom left, rgba(184, 121, 79, 0.1), transparent 60%);
+  animation: fadeIn 0.8s ease-out;
+  overflow-y: auto;
+}
+
+.home-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.home-logo {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #fff 30%, var(--primary-glow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.home-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.home-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+/* Card de Promoção */
+.promo-selection-card {
+  position: relative;
+  border-radius: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+.promo-selection-card:active,
+.promo-selection-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.promo-selection-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--card-accent), transparent 50%);
+  opacity: 0.1;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.promo-selection-card:active::before,
+.promo-selection-card:hover::before {
+  opacity: 0.2;
+}
+
+/* Thumbnail do Vídeo */
+.card-thumbnail-wrapper {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.promo-selection-card:hover .card-thumbnail {
+  transform: scale(1.05);
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--card-accent);
+  color: var(--text-on-accent);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+/* Info do Card */
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+}
+
+.card-action-btn {
+  background: transparent;
+  border: 1px solid var(--card-accent);
+  color: var(--card-accent);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.promo-selection-card:hover .card-action-btn {
+  background: var(--card-accent);
+  color: var(--text-on-accent);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.home-footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* --- TELA DO VÍDEO (TELA CHEIA) --- */
+.screen-video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: fadeIn 0.5s ease-out;
+  overflow: hidden;
+}
+
+/* Player de Vídeo */
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #000;
+}
+
+/* Overlay de Gradiente sobre o Vídeo para legibilidade */
+.video-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(5, 6, 8, 0.75) 0%, rgba(5, 6, 8, 0.05) 40%, rgba(5, 6, 8, 0.15) 65%, rgba(5, 6, 8, 0.4) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Botão de Controle de Som */
+.btn-audio-toggle {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(18, 22, 35, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: all 0.2s;
+}
+
+.btn-audio-toggle.muted::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: #d9534f;
+  transform: rotate(45deg);
+}
+
+.btn-audio-toggle:active {
+  transform: scale(0.9);
+}
+
+.btn-audio-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Overlay do Banner de Desconto */
+.discount-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 24px calc(30px + env(safe-area-inset-bottom, 16px));
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card {
+  background: rgba(10, 12, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Borda brilhosa de acordo com o cupom */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--theme-color);
+  box-shadow: 0 2px 10px var(--theme-color);
+}
+
+.discount-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.discount-title-area {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.discount-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--theme-color);
+}
+
+.discount-main-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 22px;
+  color: #fff;
+  line-height: 1.2;
+}
+
+/* Área do Cupom */
+.coupon-box {
+  display: flex;
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.coupon-box.copied {
+  border-color: #2ed573;
+  background: rgba(46, 213, 115, 0.08);
+}
+
+.coupon-code {
+  flex: 1;
+  padding: 14px 18px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.btn-copy {
+  background: var(--theme-color);
+  border: none;
+  color: var(--text-on-accent);
+  padding: 0 20px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-copy.copied {
+  background: #2ed573;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(46, 213, 115, 0.3);
+}
+
+/* Botão CTA Principal */
+.btn-cta {
+  background: linear-gradient(135deg, var(--theme-color) 0%, var(--theme-color-dark) 100%);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  text-decoration: none;
+  font-family: var(--font-heading);
+}
+
+.btn-cta:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Customizações específicas para as rotas */
+.theme-5off {
+  --theme-color: var(--accent-5off);
+  --theme-color-dark: var(--accent-5off-dark);
+}
+
+.theme-10off {
+  --theme-color: var(--accent-10off);
+  --theme-color-dark: var(--accent-10off-dark);
+}

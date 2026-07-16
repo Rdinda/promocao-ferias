@@ -1,0 +1,19 @@
+services:
+  promocao-ferias:
+    build: .
+    image: promocao-ferias:latest
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+      - "traefik.http.routers.promocao-ferias.rule=Host(`promo.novaimperiodooleo.com`)"
+      - "traefik.http.routers.promocao-ferias.entrypoints=websecure"
+      - "traefik.http.routers.promocao-ferias.tls=true"
+      - "traefik.http.routers.promocao-ferias.tls.certresolver=letsencrypt"
+      - "traefik.http.services.promocao-ferias.loadbalancer.server.port=80"
+
+networks:
+  web:
+    external: true
