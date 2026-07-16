@@ -34,34 +34,42 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: var(--font-body);
   background-color: #050608;
   color: var(--text-primary);
-  min-height: 100svh;
+  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   overflow: hidden;
-  /* Evita rolagens indesejadas no mobile */
   position: relative;
 }
 
-/* Container principal simulando mobile no desktop */
+/* Container principal: ocupa 100% da tela no mobile (mobile-first) */
 #app {
   width: 100%;
   height: 100svh;
-  max-width: 480px;
-  /* Limite de tela de celular */
-  margin: 0 auto;
   position: relative;
   background-color: var(--bg-dark);
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
-  border-left: 1px solid rgba(255, 255, 255, 0.03);
-  border-right: 1px solid rgba(255, 255, 255, 0.03);
   display: flex;
   flex-direction: column;
+}
+
+/* Moldura de celular: só entra em telas largas (tablet/desktop), nunca no mobile real */
+@media (min-width: 768px) {
+  #app {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    border-left: 1px solid rgba(255, 255, 255, 0.03);
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+  }
 }
 
 /* --- TELA INICIAL (SELEÇÃO) --- */
@@ -90,6 +98,7 @@ body {
   letter-spacing: 2px;
   background: linear-gradient(135deg, #fff 30%, var(--primary-glow) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 8px;
 }
@@ -225,7 +234,8 @@ body {
 
 /* --- TELA DO VÍDEO (TELA CHEIA) --- */
 .screen-video {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   animation: fadeIn 0.5s ease-out;
@@ -243,9 +253,12 @@ body {
 }
 
 .video-player {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   background-color: #000;
 }
 
